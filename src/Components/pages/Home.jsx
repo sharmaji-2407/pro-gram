@@ -21,12 +21,13 @@ const Home = () => {
   };
 
   return (
-    <div className="flex">
-      <div className="flex flex-col mt-10">
-        <Button className="w-1/6 mx-auto" onClick={() => setNewPostPopUp(true)}>
+    <div className="flex justify-center">
+      <div className="flex flex-col">
+        <Button className="p-5 mx-auto" variant="contained" sx={{backgroundColor : '#FFC0CB', "&:hover": {backgroundColor : '#FF69B4'}}} onClick={() => setNewPostPopUp(true)}>
           {" "}
           Add Post{" "}
         </Button>
+      </div>
         <AddnewPostPopUp
           open={newPostPopUp}
           onClose={() => setNewPostPopUp(false)}
@@ -42,7 +43,6 @@ const Home = () => {
               );
             })}
         </div>
-      </div>
     </div>
   );
 };

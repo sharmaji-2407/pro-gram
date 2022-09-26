@@ -8,11 +8,17 @@ import DialogTitle from "@mui/material/DialogTitle";
 import TextField from "@mui/material/TextField";
 import { ThemeProvider } from "@material-ui/core/styles";
 import theme from "../../theme";
-import logo from '../../logo.svg'
+import logo from "../../logo.svg";
+import '../../styles/dialogAnimation.css';
+import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 
 const AddnewPostPopUp = (props) => {
   const { open, onClose, sendPostJson } = props;
-  const [postData, setPostData] = useState({ header: "", content: "" });
+  const [postData, setPostData] = useState({
+    header: "",
+    content: "",
+    image: "",
+  });
   const [errorObj, setErrorObj] = useState({ header: "", content: "" });
   const [addSnap, setAddSnap] = useState(false);
 
@@ -21,7 +27,7 @@ const AddnewPostPopUp = (props) => {
       const PostJson = {
         header: postData.header,
         content: postData.content,
-        image: logo
+        image: logo,
       };
       sendPostJson(PostJson);
       onClose();
@@ -43,7 +49,7 @@ const AddnewPostPopUp = (props) => {
   };
 
   const handleChange = (e) => {
-    const { value, name } = e.target;
+    const { value, name, files } = e.target;
     if (
       name === "content" &&
       (value.length === 0 || value.match(/^[a-zA-Z0-9]+$/i))
@@ -53,6 +59,10 @@ const AddnewPostPopUp = (props) => {
       }
       return;
     }
+    if (name === "image") {
+      setPostData({ ...postData, [name]: URL.createObjectURL(files[0]) });
+      console.log('inside image', URL.createObjectURL(files[0]));
+    }
     setPostData({ ...postData, [name]: value });
   };
 
@@ -60,39 +70,49 @@ const AddnewPostPopUp = (props) => {
     <div>
       <ThemeProvider theme={theme}>
         <Dialog
+          fullWidth
+          maxWidth="xs"
           open={open}
           onClose={onClose}
           sx={{ borderRadius: 10, minWidth: 200 }}
+          className="px-10"
         >
           <DialogTitle sx={{ bgcolor: "primary.dark" }}>
             <div className="flex mt-3 item-center">
-              <Typography color="White" variant="h5">
+              <Typography color="#CEEDFF" variant="h5">
                 Create New Post
               </Typography>
             </div>
           </DialogTitle>
           <DialogContent>
-            <div className="postBody flex flex-col mx-10 mt-8">
+            <div className="flex flex-col mx-2 mt-12">
               <input
                 accept="image/*"
                 style={{ display: "none" }}
                 id="raised-button-file"
                 type="file"
+                name="image"
+                onChange={handleChange}
               />
               <label
                 htmlFor="raised-button-file"
                 className="flex justify-center"
               >
                 <Button
-                  variant="raised"
+                  variant="outlined"
                   component="span"
                   htmlFor="raised-button-file"
+                  sx={{
+                    color: "primary.main",
+                    "&:hover": { backgroundColor: "#cce6ff" },
+                  }}
                 >
-                  Add Snap
+                 <AddAPhotoIcon /> <span className="ml-2"> Add Snap</span>
                 </Button>
               </label>
+              <img src={postData.image} alt="" />
 
-              <div className="flex flex-col m-10">
+              <div className="flex flex-col mx-2 my-10">
                 <TextField
                   id="standard-basic"
                   name="header"
@@ -102,7 +122,7 @@ const AddnewPostPopUp = (props) => {
                 />
                 <p>{errorObj.header}</p>
               </div>
-              <div className="flex flex-col m-10">
+              <div className="flex flex-col mx-2 my-10">
                 <TextField
                   id="standard-basic"
                   label="Post Body"
