@@ -20,7 +20,8 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-import { DateTimePicker, DatePicker } from "@material-ui/pickers";
+import { DatePicker } from "@material-ui/pickers";
+
 
 const AddnewPostPopUp = (props) => {
   const { open, onClose, sendPostJson } = props;
@@ -32,7 +33,7 @@ const AddnewPostPopUp = (props) => {
     dop: "",
   });
   const [errorObj, setErrorObj] = useState({ header: "", content: "" });
-  const [startDate, setStartDate] = useState(new Date());
+  // const [dateOfPosting, setDateOfPosting] = useState(new Date());
   // const [addSnap, setAddSnap] = useState(false);
 
   const dropDownValueArr = ["Full-Time", "Contractual"];
@@ -47,12 +48,17 @@ const AddnewPostPopUp = (props) => {
         content: postData.content,
         jobtype: jobType,
         jobLocation: postData.jobLocation,
-        dop: startDate.toLocaleString().split(",")[0],
+        // dop: dateOfPosting.toLocaleString().split(",")[0],
       };
       console.log(PostJson);
       sendPostJson(PostJson);
       onClose();
     }
+  };
+
+  const handleDateofPosting = (date) => {
+    console.log(date);
+    // setDateOfPosting(date);
   };
 
   const validateFields = () => {
@@ -159,19 +165,21 @@ const AddnewPostPopUp = (props) => {
                   helperText={errorObj?.content ? errorObj.content : ""}
                 />
               </div>
-              <div className="flex mx-2 my-5 items-center">
+              {/* <div className="flex mx-2 my-5 items-center">
                 <CalendarMonthIcon color="primary" className="mr-5" />
-                <DateTimePicker
-                  label="Date And Tine"
-                  inputVariant="outlined"
-                  value={customField.fieldValue}
-                  ampm={false}
-                  onChange={(e) =>
-                    handleChangeCustomFields(e, customField.fieldKey, "date")
-                  }
-                  className="mb-24 w-full"
-                />
-              </div>
+                <LocalizationProvider dateAdapter={AdapterDateFns}>
+                  <DatePicker
+                    // openTo="year"
+                    format="dd/MM/yyyy"
+                    inputVariant="outlined"
+                    label=""
+                    views={["year", "month", "date"]}
+                    value={dateOfPosting}
+                    onChange={(e) => handleDateofPosting(e)}
+                    className="mb-24 w-full"
+                  />
+                </LocalizationProvider>
+              </div> */}
               <div className="flex flex-row mx-2 my-5 items-center">
                 <AddLocationAltIcon color="primary" className="mr-5" />
                 <TextField

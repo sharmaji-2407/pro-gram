@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { ThemeProvider } from "@material-ui/core/styles";
 import theme from "../../theme";
 import Avatar from "@mui/material/Avatar";
@@ -13,7 +13,10 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { Typography } from "@mui/material";
-import formLogo from "../../Media/Background.jpeg";
+import formLogo from "../../Media/login_vector.png";
+import { auth } from "../../firebase";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 
 function Copyright(props) {
   return (
@@ -25,7 +28,7 @@ function Copyright(props) {
     >
       {/* {'Copyright © '} */}
       <Link color="inherit" href="/">
-        Pro-gram
+        Jobify
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}
@@ -34,46 +37,61 @@ function Copyright(props) {
 }
 
 const UserLogin = () => {
+  const defaultFormData = { email: "", password: "" };
+  const [formData, setFormData] = useState(defaultFormData);
+  const [isChecked, setIsChecked] = useState(false);
+  const [fieldError, setFieldError] = useState(false);
+
+  const navigate = useNavigate();
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+    const { email, password } = formData;
+    signInWithEmailAndPassword(auth, email, password)
+      .then((auth) => {
+        navigate("/home");
+      })
+      .catch(() => {
+        setFieldError(true);
+      });
   };
 
   return (
     <ThemeProvider theme={theme}>
-      
-      <div className="flex justify-center items-center">
+      <div className="flex justify-center items-center mt-20">
         <Grid container component="main" sx={{ height: "80vh", width: "80vw" }}>
           <CssBaseline />
           <Grid
             item
             xs={false}
-            sm={4}
+            sm={false}
             md={6}
             sx={{
               background: `url(${formLogo})`,
               backgroundRepeat: "no-repeat",
               backgroundSize: "cover",
-              backgroundPosition: "left",
+              backgroundPosition: "center",
+              
             }}
           />
           <Grid
             item
             xs={12}
-            sm={8}
+            sm={12}
             md={6}
             component={Paper}
             elevation={6}
-            sx={{ backgroundColor: "" }}
+            sx={{ backgroundColor: "", height: '74vh' }}
           >
             <Box
               sx={{
                 my: 8,
-                mx: 4,
+                mx: 2,
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
@@ -83,13 +101,13 @@ const UserLogin = () => {
                 <LockOutlinedIcon />
               </Avatar>
               <Typography component="h1" variant="h5">
-                Sign in
+                Log in
               </Typography>
               <Box
                 component="form"
                 noValidate
                 onSubmit={handleSubmit}
-                sx={{ mt: 1 }}
+                sx={{ mt: 1, width: "20vw" }}
               >
                 <TextField
                   margin="normal"
@@ -98,8 +116,11 @@ const UserLogin = () => {
                   id="email"
                   label="Email Address"
                   name="email"
+                  value={formData.email}
                   autoComplete="email"
                   autoFocus
+                  onChange={handleChange}
+                  error={fieldError}
                 />
                 <TextField
                   margin="normal"
@@ -109,10 +130,19 @@ const UserLogin = () => {
                   label="Password"
                   type="password"
                   id="password"
+                  value={formData.password}
                   autoComplete="current-password"
+                  onChange={handleChange}
+                  error={fieldError}
                 />
                 <FormControlLabel
-                  control={<Checkbox value="remember" color="primary" />}
+                  control={
+                    <Checkbox
+                      value="remember"
+                      color="primary"
+                      onClick={(e) => setIsChecked(e.target.checked)}
+                    />
+                  }
                   label="Remember me"
                 />
                 <div className="flex justify-center">
@@ -125,15 +155,26 @@ const UserLogin = () => {
                     Log In
                   </Button>
                 </div>
-                <Grid container>
+                <Grid
+                  container
+                  sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                  }}
+                >
                   <Grid item xs>
-                    <Link href="#" variant="body2">
+                    <Link sx={{ cursor: "pointer" }} variant="body2">
                       Forgot password?
                     </Link>
                   </Grid>
                   <Grid item>
-                    <Link href="/Signup" variant="body2">
-                      {"Don't have an account? Sign Up"}
+                    <Link
+                      sx={{ cursor: "pointer" }}
+                      variant="body2"
+                      onClick={() => navigate("/signup")}
+                    >
+                      Don't have an account? Sign Up
                     </Link>
                   </Grid>
                 </Grid>

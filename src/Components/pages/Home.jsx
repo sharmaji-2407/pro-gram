@@ -5,6 +5,7 @@ import Posts from "../Posts";
 import Button from "@mui/material/Button";
 
 
+
 const Home = () => {
   // const [show, setShow] = useState(false);
   // const [notification, setNotification] = useState({ title: "", body: "" });
