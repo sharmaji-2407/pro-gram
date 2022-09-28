@@ -38,7 +38,7 @@ const Posts = ({ data }) => {
             </IconButton>
           }
           title={header}
-          subheader={`posted on ${dop}`}
+          // subheader={`posted on ${dop}`}
         />
         <div className="flex items-center">
           <div className="flex mx-4 items-center">
