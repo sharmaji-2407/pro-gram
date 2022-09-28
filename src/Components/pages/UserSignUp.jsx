@@ -87,7 +87,7 @@ const UserLogin = () => {
         //     message: "Phone Numbers are of 10 digits",
         //   },
         // });
-		return;
+        return;
       } else
         setErrorObj({
           ...errorObj,
@@ -113,152 +113,150 @@ const UserLogin = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Grid container component="main" sx={{ height: "80vh" }}>
-        <CssBaseline />
-        <Grid
-          item
-          xs={false}
-          sm={4}
-          md={6}
-          sx={{
-            background: `url(${formLogo})`,
-            backgroundRepeat: "no-repeat",
-            backgroundSize: "cover",
-            backgroundPosition: "left",
-          }}
-        />
-        <Grid
-          item
-          xs={12}
-          sm={8}
-          md={6}
-          component={Paper}
-          elevation={6}
-          sx={{ backgroundColor: "" }}
-        >
-          <Box
+      <div className="flex justify-center items-center">
+        <Grid container component="main" sx={{ height: "80vh", width: "80vw" }}>
+          <CssBaseline />
+          {/* <Grid
+            item
+            xs={false}
+            sm={4}
+            md={6}
             sx={{
-              my: 8,
-              mx: 4,
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
+              background: `url(${formLogo})`,
+              backgroundRepeat: "no-repeat",
+              backgroundSize: "cover",
+              backgroundPosition: "left",
             }}
+          /> */}
+          <Grid
+            item
+            xs={12}
+            sm={8}
+            md={6}
+            component={Paper}
+            elevation={6}
+            sx={{ backgroundColor: "" }}
           >
-            <Avatar sx={{ m: 1, bgcolor: "primary.dark" }}>
-              <LockOutlinedIcon />
-            </Avatar>
-            <Typography component="h1" variant="h5">
-              Sign Up
-            </Typography>
             <Box
-              component="form"
-              noValidate
-              onSubmit={handleSubmit}
-              sx={{ mt: 1 }}
+              sx={{
+                my: 8,
+                mx: 4,
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center"
+              }}
             >
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
-                value={formData.email}
-                onChange={handleChange}
-                autoFocus
-              />
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                name="phone_number"
-                label="Phone Number"
-                type="text"
-                id="phno"
-                error={errorObj.phone_number.status}
-                helperText={
-                  errorObj.phone_number.status
-                    ? errorObj.phone_number.message
-                    : ""
-                }
-                onChange={handleChange}
-                value={formData.phone_number}
-                // autoComplete="current-password"
-              />
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                name="fullname"
-                label="Full Name"
-                type="text"
-                id="fname"
-                value={formData.fname}
-                onChange={handleChange}
-                // autoComplete="current-password"
-              />
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                name="username"
-                label="UserName"
-                type="text"
-                id="uname"
-                value={formData.username}
-                onChange={handleChange}
-              />
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                value={formData.password}
-                onChange={handleChange}
-              />
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                name="passwordCheck"
-                label="Re-enter Password"
-                type="password"
-                id="password_check"
-                value={passCheck}
-                onChange={handleChange}
-              />
-              <div className="flex justify-center">
-                <Button
-                  type="submit"
-                  className="w-3/4"
-                  variant="outlined"
-                  sx={{ mt: 3, mb: 2 }}
-                >
-                  Sign Up
-                </Button>
-              </div>
-              <Grid container>
-                <Grid item xs>
-                  {/* <Link href="#" variant="body2">
-                    Forgot password?
-                  </Link> */}
+              <Avatar sx={{ m: 1, bgcolor: "primary.dark" }}>
+                <LockOutlinedIcon />
+              </Avatar>
+              <Typography component="h1" variant="h5">
+                Sign Up
+              </Typography>
+              <Box
+                component="form"
+                noValidate
+                onSubmit={handleSubmit}
+                sx={{
+                  mt: 1,
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                }}
+              >
+                <TextField
+                  margin="normal"
+                  required
+                  id="email"
+                  label="Email Address"
+                  name="email"
+                  autoComplete="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  autoFocus
+                />
+                <TextField
+                  margin="normal"
+                  required
+                  name="phone_number"
+                  label="Phone Number"
+                  type="text"
+                  id="phno"
+                  error={errorObj.phone_number.status}
+                  helperText={
+                    errorObj.phone_number.status
+                      ? errorObj.phone_number.message
+                      : ""
+                  }
+                  onChange={handleChange}
+                  value={formData.phone_number}
+                  // autoComplete="current-password"
+                />
+                <TextField
+                  margin="normal"
+                  required
+                  name="fullname"
+                  label="Full Name"
+                  type="text"
+                  id="fname"
+                  value={formData.fname}
+                  onChange={handleChange}
+                  // autoComplete="current-password"
+                />
+                <TextField
+                  margin="normal"
+                  required
+                  name="username"
+                  label="UserName"
+                  type="text"
+                  id="uname"
+                  value={formData.username}
+                  onChange={handleChange}
+                />
+                <TextField
+                  margin="normal"
+                  required
+                  name="password"
+                  label="Password"
+                  type="password"
+                  id="password"
+                  value={formData.password}
+                  onChange={handleChange}
+                />
+                <TextField
+                  margin="normal"
+                  required
+                  name="passwordCheck"
+                  label="Re-enter Password"
+                  type="password"
+                  id="password_check"
+                  value={passCheck}
+                  onChange={handleChange}
+                />
+                <div className="flex justify-center">
+                  <Button
+                    fullWidth
+                    type="submit"
+                    className="w-3/4"
+                    variant="outlined"
+                    sx={{ mt: 3, mb: 2 }}
+                  >
+                    Sign Up
+                  </Button>
+                </div>
+                <Grid container className='felx justify-center'>
+                  <Grid item>
+                    <Link href="/Login" variant="body2">
+                      {"Have an account? Login"}
+                    </Link>
+                  </Grid>
                 </Grid>
-                <Grid item>
-                  <Link href="/Login" variant="body2">
-                    {"Have an account? Login"}
-                  </Link>
-                </Grid>
-              </Grid>
-              <Copyright sx={{ mt: 5 }} />
+                <Copyright sx={{ mt: 5 }} />
+              </Box>
             </Box>
-          </Box>
+          </Grid>
         </Grid>
-      </Grid>
+      </div>
     </ThemeProvider>
   );
 };
