@@ -15,9 +15,9 @@ function App() {
       <NavBar />
       <Routes>
         <Route exact path="/" element={<LandingPage />} />
-        <Route exact path="/login" element={<UserLogin />} />
-        <Route exact path="/Signup" element={<UserSignUp />} />
-        <Route exact path="/home" element={<Home />} />
+        <Route exact path="./login" element={<UserLogin />} />
+        <Route exact path="./signup" element={<UserSignUp />} />
+        <Route exact path="./home" element={<Home />} />
       </Routes>
 
       {/* </AuthProvider> */}
