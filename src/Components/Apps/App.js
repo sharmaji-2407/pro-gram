@@ -1,5 +1,5 @@
 import "./App.css";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, } from "react-router-dom";
 import Home from "../pages/Home";
 import UserLogin from "../pages/UserLogin";
 import UserSignUp from "../pages/UserSignUp";
@@ -15,9 +15,9 @@ function App() {
       <NavBar />
       <Routes>
         <Route exact path="/" element={<LandingPage />} />
-        <Route exact path="./login" element={<UserLogin />} />
-        <Route exact path="./signup" element={<UserSignUp />} />
-        <Route exact path="./home" element={<Home />} />
+        <Route exact path="/login" element={<UserLogin />} />
+        <Route exact path="/signup" element={<UserSignUp />} />
+        <Route exact path="/home" element={<Home />} />
       </Routes>
 
       {/* </AuthProvider> */}

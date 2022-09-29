@@ -36,7 +36,7 @@ function Copyright(props) {
   );
 }
 
-const UserLogin = () => {
+const UserSignUp = () => {
   const defaultFormData = {
     username: "",
     email: "",
@@ -267,4 +267,4 @@ const UserLogin = () => {
   );
 };
 
-export default UserLogin;
+export default UserSignUp;
