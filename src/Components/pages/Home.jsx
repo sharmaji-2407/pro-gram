@@ -25,8 +25,7 @@ const Home = () => {
     <div className="flex justify-center">
       <div className="flex flex-col">
         <Button className="p-5 mx-auto" variant="contained" sx={{backgroundColor : '#FFC0CB', "&:hover": {backgroundColor : '#FF69B4'}}} onClick={() => setNewPostPopUp(true)}>
-          {" "}
-          Add Post{" "}
+          Add Post
         </Button>
       </div>
         <AddnewPostPopUp
