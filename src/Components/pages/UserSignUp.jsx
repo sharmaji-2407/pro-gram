@@ -53,8 +53,8 @@ const UserSignUp = () => {
 
   const handleChange = (event) => {
     const { value, name } = event.target;
-    if(value === '') setfinalErr(true);
-    
+    if (value === "") setfinalErr(true);
+
     setFormData({ ...formData, [name]: value });
   };
 
@@ -69,11 +69,11 @@ const UserSignUp = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    
+
     const { email, password } = formData;
     console.log(formData);
     if (passCheck) {
-      console.log('inside api call');
+      console.log("inside api call");
       createUserWithEmailAndPassword(auth, email, password)
         .then((auth) => {
           navigate("/home");
@@ -119,10 +119,13 @@ const UserSignUp = () => {
           component={Paper}
           elevation={10}
           sx={{
+            display: "flex",
+            flexDirection: "column",
             backgroundColor: "#3636360d",
-            height: "90vh",
+            height: "85vh",
             width: "60vw",
-            marginTop: "1rem",
+            // marginTop: "1rem",
+            justifyContent: "center",
           }}
         >
           <Box
@@ -132,13 +135,16 @@ const UserSignUp = () => {
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
-              justifyContent: "center",
             }}
           >
             <Avatar sx={{ m: 1, bgcolor: "primary.dark" }}>
               <LockOutlinedIcon />
             </Avatar>
-            <Typography component="h1" variant="h5">
+            <Typography
+              component="h1"
+              variant="h5"
+              sx={{ marginBottom: "3.5rem" }}
+            >
               Sign Up
             </Typography>
             <Box
@@ -198,7 +204,7 @@ const UserSignUp = () => {
               <div className="flex justify-center">
                 <Button
                   fullWidth
-                 onClick={handleSubmit}
+                  onClick={handleSubmit}
                   className="w-3/4"
                   variant="outlined"
                   sx={{ mt: 3, mb: 2 }}
@@ -206,7 +212,7 @@ const UserSignUp = () => {
                   Sign Up
                 </Button>
               </div>
-              <Grid container className="felx justify-center">
+              <Grid container className="felx justify-center mt-12">
                 <Grid item>
                   <Link href="/Login" variant="body2">
                     {"Have an account? Login"}

@@ -28,6 +28,13 @@ const ResponsiveAppBar = () => {
   const [anchorElUser, setAnchorElUser] = useState(null);
   const [displayProfileIcon, setDisplayProfileIcon] = useState(false);
 
+  const style = {
+    display: "flex",
+    justifyContent: "center",
+    height: "5rem",
+    background: "linear-gradient(to right,#4C3AE3 0%,#E1A2B8 100%)"
+  } 
+
   useEffect(() => {
     if (user) {
       setDisplayProfileIcon(true);
@@ -55,7 +62,7 @@ const ResponsiveAppBar = () => {
   };
 
   return (
-    <AppBar position="static" sx={{ zIndex: "2", backgroundColor: "black" }}>
+    <AppBar position="static" sx={style} className="nav-main">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <WorkIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
