@@ -1,13 +1,13 @@
-import React, { useState } from "react";
-import { Card, Typography, Button, Box, Grid } from "@mui/material";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
+import ShareIcon from "@mui/icons-material/Share";
+import WorkIcon from "@mui/icons-material/Work";
+import { Button, Card, Typography } from "@mui/material";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardHeader from "@mui/material/CardHeader";
 import IconButton from "@mui/material/IconButton";
-import ShareIcon from "@mui/icons-material/Share";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
-import WorkIcon from "@mui/icons-material/Work";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
+import React, { useState } from "react";
 
 const Posts = ({ data }) => {
   const { header, content, jobLocation, dop, jobtype } = data;
