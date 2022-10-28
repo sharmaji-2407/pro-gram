@@ -1,4 +1,44 @@
 .mainComponent{
-    height: 200vh;
+    height: 300vh;
+    width: 100vw;
+}
+
+.card{
+    background-color: #20baa3c4;
+    box-shadow: 0px 3px 7px #77777791;
+    transition: all 1s ease;
+}
+
+
+.card:hover{
+    transform: scale(1.2);
+    border: 1px solid #fafefd;
+    box-shadow: 1px 2px 2px #fafefd ;
+    background-color: #4ae1cbc4;
+}
+
+.sec-2{
+    height: 40vh;
+    background-color: #2c8383ba;
+    backdrop-filter: blur(2.5px);
+    background: linear-gradient(to right,#2c8383ba 0%, #02c298 100%);
+}
+
+.alert{
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    border-radius: 20px 0px 0px 0px;
+    height: 3rem;
+    width: 10vw;
+    background-color: rgb(220, 57, 57);
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    transition: all 0.5s ease-in-out;
+}
+
+.alert:hover{
+    background-color: rgba(244, 19, 19, 0.808);
+    backdrop-filter: blur(2.5px);
+    height: 6rem;
     width: 100vw;
 }
