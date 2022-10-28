@@ -4,8 +4,6 @@ import AddnewPostPopUp from "../Popups/AddnewPostPopUp";
 import Posts from "../Posts";
 import Button from "@mui/material/Button";
 
-
-
 const Home = () => {
   // const [show, setShow] = useState(false);
   // const [notification, setNotification] = useState({ title: "", body: "" });
@@ -22,27 +20,37 @@ const Home = () => {
   };
 
   return (
-    <div className="flex justify-center">
-      <div className="flex flex-col">
-        <Button className="p-5 mx-auto" variant="contained" sx={{backgroundColor : '#FFC0CB', "&:hover": {backgroundColor : '#FF69B4'}}} onClick={() => setNewPostPopUp(true)}>
+    <div className="flex flex-col justify-center items-center">
+      <div className="flex flex-col justify-center">
+        <Button
+          className="p-5 my-12"
+          variant="contained"
+          sx={{
+            backgroundColor: "#FFC0CB",
+            "&:hover": { backgroundColor: "#FF69B4" },
+          }}
+          onClick={() => setNewPostPopUp(true)}
+        >
           Add Post
         </Button>
       </div>
+      {newPostPopUp && (
         <AddnewPostPopUp
           open={newPostPopUp}
           onClose={() => setNewPostPopUp(false)}
           sendPostJson={sendPostJson}
         />
-        <div className="flex flex-row flex-wrap justify-center">
-          {profileArr.length !== 0 &&
-            profileArr.map((elem, index) => {
-              return (
-                <div key={index}>
-                  <Posts data={elem} />
-                </div>
-              );
-            })}
-        </div>
+      )}
+      <div className="flex flex-row flex-wrap justify-center">
+        {profileArr.length !== 0 &&
+          profileArr.map((elem, index) => {
+            return (
+              <div key={index}>
+                <Posts data={elem} />
+              </div>
+            );
+          })}
+      </div>
     </div>
   );
 };
