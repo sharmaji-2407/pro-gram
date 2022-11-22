@@ -23,7 +23,7 @@ const Home = () => {
     <div className="flex flex-col justify-center items-center">
       <div className="flex flex-col justify-center">
         <Button
-          className="p-5 my-12"
+          className="p-5"
           variant="contained"
           sx={{
             backgroundColor: "#FFC0CB",
