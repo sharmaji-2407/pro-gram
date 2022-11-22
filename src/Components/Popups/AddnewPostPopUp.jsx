@@ -1,27 +1,24 @@
-import React, { useState, useEffect } from "react";
+import { ThemeProvider } from "@material-ui/core/styles";
+import { Dialog, Typography } from "@mui/material";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import { Typography, Dialog } from "@mui/material";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import TextField from "@mui/material/TextField";
-import { ThemeProvider } from "@material-ui/core/styles";
-import theme from "../../theme";
+import React, { useState } from "react";
 import "../../styles/dialogAnimation.css";
+import theme from "../../theme";
 // import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
 import AddLocationAltIcon from "@mui/icons-material/AddLocationAlt";
 import NotesIcon from "@mui/icons-material/Notes";
 import TitleIcon from "@mui/icons-material/Title";
 import WorkIcon from "@mui/icons-material/Work";
-import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
+import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-import { DatePicker } from "@material-ui/pickers";
-
+import "react-datepicker/dist/react-datepicker.css";
 
 const AddnewPostPopUp = (props) => {
   const { open, onClose, sendPostJson } = props;
@@ -32,6 +29,7 @@ const AddnewPostPopUp = (props) => {
     jobLocation: "",
     dop: "",
   });
+  const contentCharLengthLimit = 1024;
   const [errorObj, setErrorObj] = useState({ header: "", content: "" });
   // const [dateOfPosting, setDateOfPosting] = useState(new Date());
   // const [addSnap, setAddSnap] = useState(false);
@@ -50,7 +48,6 @@ const AddnewPostPopUp = (props) => {
         jobLocation: postData.jobLocation,
         // dop: dateOfPosting.toLocaleString().split(",")[0],
       };
-      console.log(PostJson);
       sendPostJson(PostJson);
       onClose();
     }
@@ -62,17 +59,27 @@ const AddnewPostPopUp = (props) => {
   };
 
   const validateFields = () => {
-    if (postData.content.length > 5 && postData.content.length === 0) {
-      setErrorObj({
-        ...errorObj,
-        content: "Field text should be less than 1024 characters",
-      });
-      console.log("inside validator  ", errorObj);
-      return false;
-    } else {
-      setErrorObj({});
-      return true;
+    let dummyErrorObject = {};
+    if (postData.content.length > contentCharLengthLimit) {
+      dummyErrorObject = {
+        ...dummyErrorObject,
+        content: "Field text should be less than 1024 characters.",
+      };
     }
+    if (!postData.content.length) {
+      dummyErrorObject = {
+        ...dummyErrorObject,
+        content: "Give this job a description.",
+      };
+    }
+    if (!postData.header.length) {
+      dummyErrorObject = {
+        ...dummyErrorObject,
+        title: "Title Cannot Be Blank",
+      };
+    }
+    setErrorObj(dummyErrorObject);
+    return Reflect.ownKeys(dummyErrorObject).length ? false : true;
   };
 
   const handleChange = (e) => {
@@ -81,7 +88,7 @@ const AddnewPostPopUp = (props) => {
       name === "content" &&
       (value.length === 0 || value.match(/^[a-zA-Z0-9]+$/i))
     ) {
-      if (value.length <= 5) {
+      if (value.length <= contentCharLengthLimit) {
         setPostData({ ...postData, [name]: value });
       }
       return;
@@ -112,32 +119,6 @@ const AddnewPostPopUp = (props) => {
           </DialogTitle>
           <DialogContent>
             <div className="flex flex-col mt-2">
-              {/* <input
-                accept="image/*"
-                style={{ display: "none" }}
-                id="raised-button-file"
-                type="file"
-                name="image"
-                onChange={handleChange}
-              />
-              <label
-                htmlFor="raised-button-file"
-                className="flex justify-center"
-              >
-                <Button
-                  variant="outlined"
-                  component="span"
-                  htmlFor="raised-button-file"
-                  sx={{
-                    color: "primary.main",
-                    "&:hover": { backgroundColor: "#cce6ff" },
-                  }}
-                >
-                 <AddAPhotoIcon /> <span className="ml-2"> Add Snap</span>
-                </Button>
-              </label>
-              <img src={postData.image} alt="" /> */}
-
               <div className="flex mx-2 my-5 items-center">
                 <TitleIcon color="primary" className="mr-5" />
                 <TextField
@@ -148,8 +129,9 @@ const AddnewPostPopUp = (props) => {
                   label="Job Title"
                   variant="outlined"
                   onChange={handleChange}
+                  error={!!errorObj?.title?.length}
+                  helperText={errorObj?.title?.length ? errorObj.title : ""}
                 />
-                <p>{errorObj.header}</p>
               </div>
               <div className="flex mx-2 my-5 items-center">
                 <NotesIcon color="primary" className="mr-5" />
@@ -161,25 +143,10 @@ const AddnewPostPopUp = (props) => {
                   name="content"
                   variant="outlined"
                   onChange={handleChange}
-                  error={errorObj.content ? true : false}
-                  helperText={errorObj?.content ? errorObj.content : ""}
+                  error={errorObj?.content?.length ? true : false}
+                  helperText={errorObj?.content?.length ? errorObj.content : ""}
                 />
               </div>
-              {/* <div className="flex mx-2 my-5 items-center">
-                <CalendarMonthIcon color="primary" className="mr-5" />
-                <LocalizationProvider dateAdapter={AdapterDateFns}>
-                  <DatePicker
-                    // openTo="year"
-                    format="dd/MM/yyyy"
-                    inputVariant="outlined"
-                    label=""
-                    views={["year", "month", "date"]}
-                    value={dateOfPosting}
-                    onChange={(e) => handleDateofPosting(e)}
-                    className="mb-24 w-full"
-                  />
-                </LocalizationProvider>
-              </div> */}
               <div className="flex flex-row mx-2 my-5 items-center">
                 <AddLocationAltIcon color="primary" className="mr-5" />
                 <TextField
