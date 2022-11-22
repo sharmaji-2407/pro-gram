@@ -8,6 +8,7 @@ import AvailableJobs from "../../lists/AvailableJobs";
 import "../../styles/LandingPage.css";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
+import { auth } from "../../firebase";
 
 const LandingPage = () => {
   const [alertPopup, setAlertPopup] = useState(true);
@@ -36,6 +37,7 @@ const LandingPage = () => {
     backdropFilter: "blur(2.5px)",
   };
 
+  console.log("auth-----------", auth);
   return (
     <div className="mainComponent">
       <div
@@ -101,7 +103,7 @@ const LandingPage = () => {
         </Grid>
       </div>
       <div
-        className="sec-2 mt-20 flex items-center justify-center"
+        className="sec-2 mt-20 flex items-center justify-between overflow-y-auto max-w-full"
         // style={{ overflowX: "scroll" }}
       >
         <div className="jobs flex justify-center">
@@ -164,12 +166,7 @@ const LandingPage = () => {
             Choose amoung 1000+ posted jobs.
           </Typography>
         </Grid>
-        <Grid
-          sm={false}
-          md={4}
-          item
-          sx={actionCard}
-        >
+        <Grid sm={false} md={4} item sx={actionCard}>
           <Button
             variant="outlined"
             size="large"
