@@ -1,4 +1,4 @@
-export default [
+const AvailableJobs = [
   {
     title: "Developer",
     icon: "assets/logos/developer.png",
@@ -19,13 +19,14 @@ export default [
     title: "Sports Trainer",
     icon: "assets/logos/sports-trainer.png",
   },
-  // {
-  //   title : "Civil",
-  //   icon : "assets/logos/civil.png"
-  // },
-  // {
-  //   title : "Mechanical",
-  //   icon : "assets/logos/mechanical.png"
-  // }
-
+  {
+    title : "Civil",
+    icon : "assets/logos/civil.png"
+  },
+  {
+    title : "Mechanical",
+    icon : "assets/logos/mechanical.png"
+  }
 ];
+
+export default AvailableJobs;
